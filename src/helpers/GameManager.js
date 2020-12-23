@@ -1,1 +1,11 @@
-export default class GameManager {}
+export default class GameManager {
+    constructor(scene) {
+        this.renderZones = () => {
+
+        }
+
+        this.dealCards = () => {
+
+        }
+    }
+}

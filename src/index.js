@@ -3,8 +3,8 @@ import Card from './helpers/Card'
 import GameManager from './helpers/GameManager'
 import cyanCardFront from './assets/CyanCardFront.png'
 import magentaCardFront from './assets/MagentaCardFront.png'
+import { SCALE } from './helpers/Constants'
 
-const SCALE = 0.25
 
 class MyGame extends Phaser.Scene
 {
@@ -35,7 +35,8 @@ class MyGame extends Phaser.Scene
         }
 
         this.input.on('dragstart', function (pointer, gameObject) {
-            this.children.bringToTop(gameObject)
+            // this.children.bringToTop(gameObject)
+            gameObject.setScale(SCALE)
         }, this)
 
         this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
