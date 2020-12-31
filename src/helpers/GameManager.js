@@ -20,7 +20,7 @@ export default class GameManager {
 
             for (let i = 0; i < amount; i++) {
                 let card = new Card(scene)
-                card.render(width / 2.5 + (i * 100), height * position, image, scale)
+                card.render(width / 3 + (i * 100), height * position, image, scale)
                 hand.push(card)
             }
 

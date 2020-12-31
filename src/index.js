@@ -19,13 +19,14 @@ class MyGame extends Phaser.Scene
 
     create () {
         const { width, height } = this.sys.game.canvas
+        const initialCardAmount = 7
         const gm = new GameManager(this)
 
         gm.renderZones(width, height)
 
-        let myHand = gm.dealCards(5, width, height, 0.9, 'cyanCardFront', SCALE)
+        let myHand = gm.dealCards(initialCardAmount, width, height, 0.9, 'cyanCardFront', SCALE)
 
-        let enemyHand = gm.dealCards(5, width, height, 0.1, 'magentaCardFront', SCALE)
+        let enemyHand = gm.dealCards(initialCardAmount, width, height, 0.1, 'magentaCardFront', SCALE)
 
         this.input.on('dragstart', function (pointer, gameObject) {
             gameObject.setScale(SCALE)
@@ -34,6 +35,13 @@ class MyGame extends Phaser.Scene
         this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
             gameObject.x = dragX
             gameObject.y = dragY
+        })
+
+        this.input.on('drop', function (pointer, gameObject, dropZone) {
+            dropZone.data.values.cards++
+            gameObject.x = (dropZone.x / 2) + (dropZone.data.values.cards * 100)
+            gameObject.y = dropZone.y
+            gameObject.disableInteractive()
         })
     }
 
