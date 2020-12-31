@@ -19,23 +19,15 @@ class MyGame extends Phaser.Scene
 
     create () {
         const { width, height } = this.sys.game.canvas
+        const gm = new GameManager(this)
 
-        let myHand = []
-        for (let i = 0; i < 5; i++) {
-            let card = new Card(this)
-            card.render(width / 2.5 + (i * 100), height * 0.9, 'cyanCardFront', SCALE)
-            myHand.push(card)
-        }
+        gm.renderZones(width, height)
 
-        let enemyHand = []
-        for (let i = 0; i < 5; i++) {
-            let card = new Card(this)
-            card.render(width / 2.5 + (i * 100), height * 0.1, 'magentaCardFront', SCALE)
-            enemyHand.push(card)
-        }
+        let myHand = gm.dealCards(5, width, height, 0.9, 'cyanCardFront', SCALE)
+
+        let enemyHand = gm.dealCards(5, width, height, 0.1, 'magentaCardFront', SCALE)
 
         this.input.on('dragstart', function (pointer, gameObject) {
-            // this.children.bringToTop(gameObject)
             gameObject.setScale(SCALE)
         }, this)
 

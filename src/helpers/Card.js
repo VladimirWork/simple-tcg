@@ -5,6 +5,7 @@ export default class Card {
     constructor(scene) {
         this.render = (x, y, sprite, scale) => {
             let card = scene.add.image(x, y, sprite).setScale(scale, scale).setInteractive()
+
             card.on('pointerover', function(pointer) {
                 card.setScale(SCALE_BIG)
                 scene.children.bringToTop(card)
@@ -13,7 +14,12 @@ export default class Card {
             card.on('pointerout', function(pointer) {
                 card.setScale(SCALE)
             })
-            scene.input.setDraggable(card)
+
+            scene.input.setDraggable(card) // can drag
+            card.setDataEnabled() // can add keys and values
+
+            card.data.set('name', 'Some card')
+
             return card
         }
     }
